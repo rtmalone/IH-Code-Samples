@@ -1,0 +1,32 @@
+include ../partials/flash
+#alertArea
+table.dataTable.table.table-responsive
+  thead
+    tr#patient-list-head
+      th Patient
+      th.col-dob.hidden-xs DOB
+      th.col-id Pat
+        span.visible-sm-inline.visible-md-inline .
+        span.hidden-sm.hidden-md ient
+        |  ID
+      th.hidden-xs Latest ECG (
+        span.timezone
+        span )
+        
+  tbody
+    each result in patients
+      -var content = result.content
+      
+      tr#patient-list-body.outer-row.animated.fadeIn.collapsed(data-toggle="collapse" data-content=JSON.stringify(content) href='' data-pid="#{result.content[0].patient_id}")
+        td(title="#{result.patient.name_last}, #{result.patient.name_first}") #{result.patient.name_last}, #{result.patient.name_first}&nbsp;&nbsp;(#{result.content_count})
+        td.dob.hidden-xs(title="#{result.patient.dob}") #{result.patient.dob}
+        td(title="#{result.patient.mrn}") #{result.patient.mrn}
+        td.hidden-xs
+          span.calendar #{content[0].collected}
+          span.text-muted
+            if content[0].ordering_physician && content[0].location
+              span  (Ordered by: #{content[0].ordering_physician.name_first} #{content[0].ordering_physician.name_last}, #{content[0].location})
+            else if content[0].ordering_physician
+              span  (Ordered by: #{content[0].ordering_physician.name_first} #{content[0].ordering_physician.name_last})
+            else if content[0].location
+              span  (Ordered by:  #{content[0].location})

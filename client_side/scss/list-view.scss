@@ -1,0 +1,112 @@
+@import "partials/variables";
+@import "mixins/mixins";
+@import "partials/list-view-navbar";
+@import "partials/list-view-sidebar";
+@import "partials/list-view-table";
+
+.fixedHeader{
+  position: fixed !important;
+}
+
+.error-msg{
+  color: red;
+  margin-bottom: 0px;
+}
+
+.active-view {
+  color: rgb(75, 218, 136) !important;
+  border: 2px solid $mint-green;
+  &:hover{
+    border: 2px solid $mint-green;
+  }
+  &:focus{
+    border: 2px solid $mint-green;
+  }
+}
+
+.waveform-loader{
+  display: none;
+  position: fixed;
+  bottom: 0;
+  background-color: #595959;
+  svg {
+    top: calc((50vh - 50px) - #{$topbar-height});
+    left: calc(50% - 275px);
+  }
+  @media screen and (max-width: 480px) {
+    svg {
+      left: calc(50% - 150px);
+    }
+  }
+}
+
+.filter_class {
+  .waveform-loader {
+    display: block;
+  }
+}
+
+#saveFilterModal, #deleteFilterModal{
+  .modal-dialog{
+    margin: 21rem auto;
+  }
+  .modal-content{
+    background-color: lighten($medium-gray, 35%);
+  }
+  .modal-header{
+    border: none;
+  }
+  .modal-body{
+    padding: 0px;
+    input{
+      width: 100%;
+    }
+  }
+  .modal-footer{
+    .col-md-6{
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    border: none;
+    .btn-primary{
+      background-color: $finalized-green;
+    }
+  }
+}
+
+#deleteFilterModal{
+  span{
+    font-weight: bolder;
+  }
+}
+
+.dob-filter{
+  width: 33%;
+  display: inline-block;
+}
+
+.dob-filter + .dob-filter{
+  border-left: 1px solid black;
+}
+
+.no-padding{
+  @extend %no-padding;
+}
+
+.no-margin{
+  @extend %no-margin;
+}
+
+.fade-element{
+  @include opacity(0);
+}
+
+/* This hides dropdown button arrow in IE */
+select::-ms-expand {
+  display: none;
+}
+/* This hides focus around selected option in FF */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}

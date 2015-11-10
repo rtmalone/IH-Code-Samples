@@ -1,0 +1,117 @@
+#worklist-navbar{
+  color: $smoke;
+  border: none;
+  &.hide-sidebar{
+    left: 0 !important;
+  }
+  .custom-select-wrapper{
+    margin: 6px 0px;
+    .custom-select:after{
+      right: 8px;
+      font-size: 1.2em;
+      padding: 9px 10px;
+    }
+    select{
+      line-height: 1.5;
+    }
+    &.custom-select-wrapper{
+      width: 100%;
+    }
+  }
+  .navbar-form{
+    margin: 4px 0;
+    input{
+      border: none;
+    }
+  }
+  .navbar-btn {
+    margin: 2.5px 5px;
+    border: 2px solid transparent;
+    &:hover{
+      border: 2px solid $mint-green;
+      color: $mint-green
+    }
+    &:focus{
+      border: 2px solid $mint-green;
+      color: $mint-green
+    }
+  }
+  .active-view {
+    color: $mint-green;
+    background-color: #000;
+    border: 2px solid $mint-green;
+    &:hover{
+      border: 2px solid $mint-green;
+    }
+    &:focus{
+      border: 2px solid $mint-green;
+    }
+  }
+  .btn-opacity {
+    opacity: 0.5;
+  }
+  #userList {
+    padding: 15px;
+    font-size: 18px;
+    text-align: left;
+    border-right: none;
+  }
+  #filterList{
+    button{
+      @extend %dropdown-attrs;
+      line-height: 1.42857143;
+      margin: 5px 0px;
+      text-align: left;
+      font-weight: bold;
+      i{
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+    button:nth-child(1){
+      width: calc(100% - 40px);
+    }
+    button:nth-child(2){
+      width: 40px;
+    }
+    .dropdown-menu{
+      height: 30rem;
+      overflow-y: auto;
+      background-color: lighten($medium-gray, 50%);;
+      box-shadow: 0px 4px 6px -2px gray;
+      width: 100%;
+      top: 98%;
+      .dropdown-header{
+        border-bottom: 1px solid #ccc;
+      }
+      li span{
+        display: block;
+        color: $medium-gray !important;
+        clear: both;
+        font-weight: bold;
+        line-height: 1.7;
+        white-space: nowrap;
+        padding: 5px 20px;
+        cursor: pointer;
+        i{
+          position: relative;
+          padding: 4px 2px;
+          width: 10%;
+          font-size: 17px;
+          &:hover{
+            color: red;
+          }
+        }
+      }
+      li.filter-li:hover{
+        background-color: lighten($medium-gray, 35%);
+      }
+    }
+  }
+  a.dropdown-toggle{
+    color: $smoke;
+  }
+  select{
+    @extend %custom-select;
+  }
+}

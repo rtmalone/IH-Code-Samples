@@ -1,0 +1,53 @@
+//- Table with "ECG ROWS"
+include ../partials/flash
+#alertArea
+table.dataTable.table.table-responsive.worklist
+  thead
+    tr
+      th.col-icon.text-right
+        i.fa.fa-exclamation-circle
+      th.col-icon.text-right
+        i.fa.fa-check-circle
+      th.patient-name Patient
+      th.col-collected.hidden-xs Collected (
+        span.timezone
+        span )
+      th.col-dob.hidden-xs DOB
+      th.col-id.hidden-xs Pat
+        span.visible-sm-inline.visible-xs-inline.visible-md-inline .
+        span.hidden-sm.hidden-md ient
+        |  ID
+      th.hidden-xs Location
+      th Ordered
+        span.hidden-sm &nbsp;by
+        
+  //- ECG Rows
+  tbody#worklist
+    each ecg in ecg_list
+      tr.outer-row(data-id='#{ecg.id}')
+
+        td.text-right
+          if ecg.priority === "URGENT"
+            i.fa.fa-exclamation-circle.text-danger
+        td.text-right
+          if ecg.diagnosis_state === "DIAGNOSED"
+            i.fa.fa-check-circle.finalized-blue
+        td
+          .first #{ecg.patient.name_last}, #{ecg.patient.name_first}
+        td.hidden-xs
+          div.ecg-cap.invisible #{ecg.collected}
+        td.hidden-xs
+          div.dob.invisible #{ecg.patient.dob}
+        td.hidden-xs
+          div #{ecg.patient.mrn}
+        if ecg.location
+          td.hidden-xs #{ecg.location}
+        else
+          td.hidden-xs Not Available
+
+        if ecg.ordering_physician
+          - var physician =  ecg.ordering_physician.name_first !== null && ecg.ordering_physician.name_last !== null ? ecg.ordering_physician.name_last + ', ' + ecg.ordering_physician.name_first : 'Not Available'
+          td
+            div(data-toggle='tooltip' data-placement='right' title='#{ecg.ordering_physician.name_last}, #{ecg.ordering_physician.name_first}') #{physician}
+        else
+          td Not Available

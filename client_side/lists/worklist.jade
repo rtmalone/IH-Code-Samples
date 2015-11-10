@@ -1,0 +1,55 @@
+extends ../layouts/layout
+block css
+  link(href='https://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.css')
+  link(rel='stylesheet', href='/css/custom/list-view.css')
+
+block content
+  #saveFilterModal.modal.fade
+    .modal-dialog.modal-sm
+      .modal-content
+        .modal-header
+          h4.modal-title.text-center Give your filter a name:
+        .modal-body
+          .container-fluid
+            .row
+              .col-sm-12
+                input#filterName(type='text' name='name')
+                h5.text-center.error-msg.hidden Please provide a name for your filter.
+        .modal-footer
+          .container-fluid
+            .row
+              .col-sm-12.col-md-6
+                button.btn.btn-default.btn-block(type='button', data-dismiss='modal') Cancel
+              .col-sm-12.col-md-6
+                button.btn.btn-success.btn-block(type='button') Save Filter
+  
+  #deleteFilterModal.modal.fade
+    .modal-dialog.modal-sm
+      .modal-content
+        .modal-header
+          h4.modal-title.text-center Are you sure you'd like to delete <span>the filter</span>?
+        .modal-footer
+          .container-fluid
+            .row
+              .col-sm-12.col-md-6
+                button.btn.btn-default.btn-block(type='button', data-dismiss='modal') Cancel
+              .col-sm-12.col-md-6
+                button.btn.btn-danger.btn-block(type='button') Delete
+
+  include worklist-header
+
+  include worklist-sidebar
+
+  - var filter_class = sticky_filter ? 'filter_class' : ''
+  #main.transition(class='#{user.preferences.connect_state.sidebar_state.main} #{filter_class}')
+    include ../partials/waveform-loader
+    #load-container
+      include worklist-main
+
+-// Add specific CSS and JS files
+block js
+  script(src='https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js')
+  script(src='https://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js')
+  script(src='/js/vendor/datatables-fixedheader.js')
+  script(src='/js/worklist/worklist.js')
+  script(src='/js/worklist/filter.js')

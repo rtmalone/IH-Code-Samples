@@ -1,0 +1,77 @@
+-// Sidebar
+#sidebar.transition.hidden-xs(class='#{user.preferences.connect_state.sidebar_state.sidebar} ')
+  - var fadeElement = user.preferences.connect_state.sidebar_state.sidebar === 'hide-sidebar' ? 'fade-element' : ''
+  
+  #toggle-handle
+    i.fa.fa-arrows-h
+  
+  form.transition(class='#{fadeElement}')
+    span.sidebar-label Importance:
+    .custom-select-wrapper
+      .custom-select
+        select.form-control.no-margin(name='priority')
+          option(value='') All
+          option(value='normal') Standard Only
+          option(value='urgent') Important Only
+    
+    span.sidebar-label Finalize:
+    .custom-select-wrapper
+      .custom-select
+        select.form-control.no-margin(name='diagnosis_state')
+          option(value='') All Records
+          option(value='Diagnosed') Read
+          option(value='Undiagnosed') Unread
+    
+    span.sidebar-label Captured in the last:
+    .custom-select-wrapper.time-frame-filter
+      .custom-select
+        select.form-control.no-margin(name='collected_after')
+          option(value='') All
+          option(value='1 hour') 1 Hour
+          option(value='6 hours') 6 Hours
+          option(value='12 hours') 12 Hours
+          option(value='1 day') Day
+          option(value='1 week') Week
+          option(value='1 month' selected) Month
+          option(value='1 year') Year
+    
+    span.sidebar-label Location:
+    .custom-select-wrapper
+      .custom-select
+        select#entLocations.form-control.no-margin(name='location')
+          option(value='') All
+          if enterprise_locations
+            each obj in enterprise_locations
+              option(value='#{obj.location}')= obj.location
+    
+    span.sidebar-label Ordering Physician:
+    .custom-select-wrapper
+      .custom-select
+        select#OPs.form-control.no-margin(name='ordering_physicians')
+          option(value='') All
+          option(value='~') No Physician
+          if locals.user.ordering_physicians
+            each obj in locals.user.ordering_physicians
+              option(value='#{obj.id}') #{obj.name_last}, #{obj.name_first}
+    
+    span.sidebar-label Patient Sex:
+    .custom-select-wrapper
+      .custom-select
+        select.form-control.margin-2(name='patient_gender')
+          option(value='') All
+          option(value='M') Male
+          option(value='F') Female
+
+  .container-fluid.transition(class='#{fadeElement}')
+    .row
+      #filter-btns.col-xs-12
+        .btn-group.btn-block
+          button#save-filter-btn.btn.btn-default(value='save filter') Save Filter
+          button.btn.btn-default.dropdown-toggle(data-toggle='dropdown')
+            span.caret
+          ul.dropdown-menu(role='menu')
+            li: a.save-type Save Filter
+            li: a.save-type Save as
+        button.btn.btn-default.btn-block.margin-1(value='clear filter') Clear Filter
+
+  img#ih-logo.transition(src='img/logo-white.png', class='#{fadeElement}')

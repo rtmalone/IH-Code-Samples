@@ -1,0 +1,39 @@
+mixin searchField
+  .input-group.patient-search
+    input.form-control(type='text', name='patient_last_name', placeholder='Patient Last Name')
+    span.input-group-btn
+      button.btn.btn-default(type='button'): span.fa.fa-search
+
+
+nav#worklist-navbar.navbar.navbar-default.navbar-fixed-top.transition(class='#{user.preferences.connect_state.sidebar_state.main} ')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#worklist-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      .navbar-brand.visible-xs-inline-block
+        +searchField
+        
+    #worklist-collapse.collapse.navbar-collapse
+      .row
+
+        -// Filter Select
+        .col-sm-4.hidden-xs
+          if sticky_filter
+            div#stickyFilter(data-id='#{sticky_filter}')
+          #filterList.btn-group.btn-block
+            button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown') Default Filter - captured in last month
+            button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+              i.fa.fa-angle-down.pull-right
+            ul.dropdown-menu(role='menu')
+
+        -// Search Form
+        .col-sm-4.hidden-xs
+          .navbar-form
+            +searchField
+
+        -// Group results by
+        .col-sm-4
+          ul.nav.navbar-nav.navbar-right
+            include ../partials/user-nav
